@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achadinhos da Tami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #C9637A;
+    --rose-light: #F5E8EC;
+    --rose-dark: #9E3F55;
+    --sand: #F7F3EE;
+    --sand-dark: #EDE6DC;
+    --ink: #2A2320;
+    --muted: #8A7B74;
+    --white: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--sand);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 48px;
+  }
+
+  /* Header */
+  .hero {
+    width: 100%;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 24px 28px;
+    border-bottom: 1px solid var(--sand-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--rose-light));
+  }
+
+  .avatar-wrap {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--rose-light);
+    border: 3px solid var(--rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .avatar-initials {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--rose-dark);
+    font-weight: 600;
+    letter-spacing: -1px;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .hero-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    text-align: center;
+    max-width: 260px;
+    line-height: 1.5;
+  }
+
+  .hero-tagline strong {
+    color: var(--rose);
+    font-weight: 500;
+  }
+
+  /* Conteúdo */
+  .container {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Seção label */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding: 0 4px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+  }
+
+  /* Link card */
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--white);
+    border: 1px solid var(--sand-dark);
+    border-radius: 16px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+  }
+
+  .link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,99,122,0.12);
+    border-color: var(--rose);
+  }
+
+  .link-card:active {
+    transform: translateY(0);
+  }
+
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .icon-rose    { background: var(--rose-light); }
+  .icon-green   { background: #E8F5E9; }
+  .icon-orange  { background: #FFF3E0; }
+  .icon-purple  { background: #F3E5F5; }
+  .icon-blue    { background: #E3F2FD; }
+  .icon-teal    { background: #E0F7FA; }
+
+  .card-text { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-arrow {
+    font-size: 16px;
+    color: var(--rose);
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  /* Card destaque */
+  .link-card.featured {
+    background: var(--rose);
+    border-color: var(--rose);
+  }
+
+  .link-card.featured .card-title { color: var(--white); }
+  .link-card.featured .card-sub   { color: rgba(255,255,255,0.75); }
+  .link-card.featured .card-arrow { color: var(--white); opacity: 0.8; }
+  .link-card.featured .card-icon  { background: rgba(255,255,255,0.2); }
+
+  /* Rodapé */
+  .footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  .footer span {
+    color: var(--rose);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link-card { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="avatar-wrap">
+    <span class="avatar-initials">T</span>
+  </div>
+  <div class="hero-name">Achadinhos da Tami</div>
+  <p class="hero-tagline">Produtos para <strong>casa, corpo e bem-estar</strong> — testo antes de recomendar ✨</p>
+</div>
+
+<div class="container">
+
+  <p class="section-label">🔥 Em destaque</p>
+
+  <a class="link-card featured" href="https://shopee.com.br" target="_blank" rel="noopener">
+    <div class="card-icon">🛍️</div>
+    <div class="card-text">
+      <div class="card-title">Achadinhos na Shopee</div>
+      <div class="card-sub">Todos os produtos com link direto</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <p class="section-label">🏠 Para sua casa</p>
+
+  <a class="link-card" href="#" target="_blank" rel="noopener">
+    <div class="card-icon icon-orange">🍳</div>
+    <div class="card-text">
+      <div class="card-title">Gadgets de cozinha</div>
+      <div class="card-sub">Os que eu uso todo dia</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card" href="#" target="_blank" rel="noopener">
+    <div class="card-icon icon-teal">🗂️</div>
+    <div class="card-text">
+      <div class="card-title">Organização</div>
+      <div class="card-sub">Deixar a casa linda e funcional</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <p class="section-label">💆 Para o seu corpo</p>
+
+  <a class="link-card" href="#" target="_blank" rel="noopener">
+    <div class="card-icon icon-rose">💊</div>
+    <div class="card-text">
+      <div class="card-title">Suplementos femininos</div>
+      <div class="card-sub">Colágeno, magnésio, vitaminas</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card" href="#" target="_blank" rel="noopener">
+    <div class="card-icon icon-purple">🧴</div>
+    <div class="card-text">
+      <div class="card-title">Skincare & bem-estar</div>
+      <div class="card-sub">Cuidados que fazem diferença</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card" href="#" target="_blank" rel="noopener">
+    <div class="card-icon icon-green">🏋️</div>
+    <div class="card-text">
+      <div class="card-title">Fitness em casa</div>
+      <div class="card-sub">Elásticos, tapetes, acessórios</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <p class="section-label">📲 Me acompanha</p>
+
+  <a class="link-card" href="https://tiktok.com/@tamigerhardt" target="_blank" rel="noopener">
+    <div class="card-icon icon-blue">🎵</div>
+    <div class="card-text">
+      <div class="card-title">TikTok</div>
+      <div class="card-sub">@tamigerhardt</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card" href="https://instagram.com/tamigerhardt" target="_blank" rel="noopener">
+    <div class="card-icon icon-rose">📸</div>
+    <div class="card-text">
+      <div class="card-title">Instagram</div>
+      <div class="card-sub">@tamigerhardt · 451K</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <div class="footer">
+    feito com <span>♥</span> pela Tami
+  </div>
+
+</div>
+</body>
+</html>
